@@ -10,8 +10,10 @@ import { openPlayer, playStream } from '../../actions';
 const CardAction = (props)  => {
 
   const handleClick = () => {
-    props.playStream(props.stream)
-    props.openPlayer();
+    props.playStream(props.stream.id, ()=> {
+      props.openPlayer();
+    })
+    
   }
 
   return (

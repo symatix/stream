@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -33,37 +34,57 @@ const styles = theme => ({
 class PlayerCardActions extends Component {
     state = { 
         playing: true,
-        volume: 0.75
+        volume: this.props.volume
     }
 
     handlePlay() {
-        this.setState({ playing: !this.state.playing })
+        axios.post('/api/stop', {player: this.state.playing})
+            .then(res => {
+                if (res.data === true){
+                    this.setState({ playing: !this.state.playing })
+                }
+            }).catch( err => console.log(err));
+    }
+    handleStreamChange(action){
+        axios.post('/api/change-stream', {id: this.props.streamId, action })
+            .then(res => {
+                this.props.playStream(res.data.id);
+            }).catch( err => console.log(err));
     }
     handleChange(event){
-        this.setState({ volume: event.target.value })
+        
+        const volume = Math.round(event.target.value * 100) / 100;
+            this.apiVolumeChange(volume);
     }
     handleVolumeUp(){
-        if (this.state.volume < 1) {
-            this.setState({ volume: this.state.volume + 0.1 })
-        } 
+        let volume = this.state.volume + 0.1;
+        volume = volume < 1 ? volume : 1;
+
+        this.apiVolumeChange(volume);
     }
     handleVolumeDown(){
-        if (this.state.volume > 0) {
-            this.setState({ volume: this.state.volume - 0.1 })
-        }
+        let volume = this.state.volume - 0.1;
+        volume = volume < 0 ? 0 : volume;
+        this.apiVolumeChange(volume);
+    }
+    apiVolumeChange(volume){
+        axios.post('/api/volume', { volume })
+            .then(res => this.setState({ volume: res.data.volume })) // take this out if response too long
+            .catch(err => console.log(err));
     }
 
     render(){
+        
         const { classes, moreInfo, handleExpand } = this.props;
         return (
             <CardActions className={classes.actions} disableActionSpacing>
-                <IconButton color="primary" aria-label="Prev Stream">
+                <IconButton color="primary" aria-label="Prev Stream" onClick={() => this.handleStreamChange("prev")}>
                     <SkipPrevious />
                 </IconButton>
                 <IconButton color="primary" aria-label="Play/Pause" onClick={this.handlePlay.bind(this)} >
                     {this.state.playing ? <Pause /> : <PlayArrow />}
                 </IconButton>
-                <IconButton color="primary" aria-label="Next Stream">
+                <IconButton color="primary" aria-label="Next Stream" onClick={() => this.handleStreamChange("next")}>
                     <SkipNext />
                 </IconButton>
                 <IconButton color="primary" aria-label="Volume Down"  onClick={this.handleVolumeDown.bind(this)}>

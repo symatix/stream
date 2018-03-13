@@ -10,11 +10,11 @@ function Transition(props) {
 }
 
 const Player = (props) => {
-    const { state, stream, volume } = props;
+    const { state, streams, stream, volume } = props;
 
     const renderPlayer = () => {
         if (state) {
-            return <PlayerCard stream={stream} volume={volume}/>
+            return <PlayerCard streams={streams} stream={stream} volume={volume}/>
         }
     }
 

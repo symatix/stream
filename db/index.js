@@ -19,5 +19,13 @@ module.exports = [
         info:'Za sve koji su ludi ali se osjecaju ko pickice ili pokusavaju zbarit normalnu butru.',
         image:'/images/stream-electro.jpg',
         url:'#'
+    },
+    {
+        id:132,
+        name:'Yammat FM',
+        info:'Sve sto trebate cuti.',
+        image:'/images/stream-electro.jpg',
+        url:'http://192.240.102.133:12430/;?_=0.134229652007956'
     }
 ]
+

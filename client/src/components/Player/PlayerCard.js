@@ -29,7 +29,7 @@ class PlayerCard extends React.Component {
   };
 
   render() {
-    const { classes, stream, volume } = this.props;
+    const { classes, streams, stream, volume } = this.props;
 
     return (
       <div>
@@ -48,6 +48,7 @@ class PlayerCard extends React.Component {
                 info={stream.info} />
 
             <PlayerCardActions 
+                streams={streams}
                 playStream={this.props.playStream}
                 volume={volume}
                 streamId={stream.id}

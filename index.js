@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -12,17 +11,25 @@ let globalVol = 0.75;
 
 app.use(bodyParser.json());
 
+// sends data of all the streams as JSON array of objects
+// if db in cloud, on no internet connection send fallback object with local playlist
 app.get('/api/streams', (req, res) => {
     res.send(db)
 });
 
+
+// starts the stream by stream ID
+// and sends that stream object along with player volume and mp3 metadata
+// if stream unsuccessful, send fallback object
 app.post('/api/play', (req, res) => {
-    console.log(req.body)
-    const stream = _.find(db, stream => stream.id === req.body.id);
+    const stream = db.find(stream => stream.id === req.body.id);
     console.log('=> playing stream: ', stream);
-    res.send({stream, volume:globalVol});
+    res.send({stream, volume:globalVol, meta:{}});
 })
 
+
+// stops and resumes play
+// sends bool 'true' if change successful
 app.post('/api/stop', (req, res) => {
     if(req.body.player === true){
         console.log("=> stopping player")
@@ -32,35 +39,12 @@ app.post('/api/stop', (req, res) => {
     res.send(true);
 });
 
-
+// changes volume of player and sends new volume to client
 app.post('/api/volume', (req, res) => {
     console.log('=> changing player volume: ', req.body.volume);
     globalVol = req.body.volume;
     res.send({volume: globalVol});
 })
-
-app.post('/api/change-stream', (req, res) => {
-    const currentIndex = _.findIndex(db, (stream) => stream.id === req.body.id);
-    let index;
-
-    if (req.body.action === 'prev'){
-        index = currentIndex - 1 < 0 
-            ? db.length - 1 
-            : currentIndex - 1;
-    }
-
-    if (req.body.action === 'next'){
-        index = currentIndex + 1 >= db.length 
-            ? 0 
-            : currentIndex + 1;
-    }
-
-    console.log('=> changing active stream: ', db[index])
-    res.send({
-        id: db[index].id,
-        meta:{}
-    });
-});
 
 
 

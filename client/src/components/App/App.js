@@ -22,8 +22,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Container streams={streams} />
-        <Player stream={activeStream} state={player} volume={volume} />
+        <Container streams={streams} activeStream={activeStream}/>
+        <Player 
+          streams={streams}
+          stream={activeStream} 
+          state={player} 
+          volume={volume} />
       </div>
     );
   }

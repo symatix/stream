@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import PlayerCardActions from '../Player/PlayerCardActions';
 
 import { openPlayer, playStream } from '../../actions';
 
@@ -15,11 +16,11 @@ const CardAction = (props)  => {
     })
     
   }
-
+  console.log(props)
   return (
         <CardActions>
           <Button onClick={handleClick} size="small" color="primary">
-            Play
+            {props.active ? 'Now Playing' : 'Play'}
           </Button>
         </CardActions>
   );
@@ -27,7 +28,8 @@ const CardAction = (props)  => {
 
 CardAction.propTypes = {
   stream:PropTypes.object.isRequired,
-  openPlayer: PropTypes.func.isRequired
+  openPlayer: PropTypes.func.isRequired,
+  active: PropTypes.bool
 };
 
 function mapDispatchToProps(dispatch) {
@@ -38,3 +40,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(CardAction);
+

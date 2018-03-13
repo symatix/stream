@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -46,30 +47,44 @@ class PlayerCardActions extends Component {
             }).catch( err => console.log(err));
     }
     handleStreamChange(action){
-        axios.post('/api/change-stream', {id: this.props.streamId, action })
-            .then(res => {
-                this.props.playStream(res.data.id);
-            }).catch( err => console.log(err));
+        const { streams, streamId } = this.props;
+        const currentIndex = _.findIndex(streams, (stream) => stream.id === streamId);
+        let index;
+        if (action === 'prev'){
+            index = currentIndex - 1 < 0 
+                ? streams.length - 1 
+                : currentIndex - 1;
+        }
+        if (action === 'next'){
+            index = currentIndex + 1 >= streams.length 
+                ? 0 
+                : currentIndex + 1;
+        }
+        this.props.playStream(streams[index].id)
     }
+
     handleChange(event){
         
         const volume = Math.round(event.target.value * 100) / 100;
             this.apiVolumeChange(volume);
     }
+
     handleVolumeUp(){
         let volume = this.state.volume + 0.1;
         volume = volume < 1 ? volume : 1;
 
         this.apiVolumeChange(volume);
     }
+
     handleVolumeDown(){
         let volume = this.state.volume - 0.1;
         volume = volume < 0 ? 0 : volume;
         this.apiVolumeChange(volume);
     }
+
     apiVolumeChange(volume){
+        this.setState({ volume });
         axios.post('/api/volume', { volume })
-            .then(res => this.setState({ volume: res.data.volume })) // take this out if response too long
             .catch(err => console.log(err));
     }
 

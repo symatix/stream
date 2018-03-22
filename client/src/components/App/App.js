@@ -10,7 +10,7 @@ import Header from '../Header/Header'
 import Container from '../Container/Container'
 import Player from '../Player/Player'
 
-class App extends Component {
+export class App extends Component {
 
   componentWillMount(){
     this.props.getStreams();

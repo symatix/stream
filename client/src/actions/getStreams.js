@@ -3,9 +3,9 @@ import { GET_STREAMS } from '../constants';
 
 
 export const getStreams = () => dispatch => {
-    axios.get('/api/streams')
+    return axios.get('/api/streams')
         .then(res => {
-            dispatch({ type: GET_STREAMS, payload: res.data });
+            return dispatch({ type: GET_STREAMS, payload: res.data });
         }).catch( err => console.log(err));
 	
 };

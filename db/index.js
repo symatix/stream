@@ -2,7 +2,7 @@ module.exports = [
     {
         id:1,
         name:'Stream One',
-        info:'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        info:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         image:'/images/stream-electro.jpg',
         url:'http://rnrw.cast.addradio.de/rnrw-0169/dein80er/high/stream.mp3?'
     },

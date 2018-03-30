@@ -11,6 +11,10 @@ import HeaderProfileButton from './HeaderProfileButton';
 const styles = {
   root: {
     flexGrow: 1,
+  },
+  positionFixed: {
+    height: 64,
+    bottom:0
   }
 };
 
@@ -19,7 +23,7 @@ const Header = (props) => {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar className={classes.positionFixed} position="absolute" color="default">
           <Toolbar>
             <HeaderMenuButton />
             <HeaderTitle />

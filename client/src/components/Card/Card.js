@@ -25,7 +25,6 @@ const StreamCard = (props) => {
     const { active, classes } = props;
 
     const cardClass = active ? classes.cardActive : classes.card;
-    console.log(props)
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={cardClass} raised={active} >

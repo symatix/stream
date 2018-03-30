@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import PlayerCardActions from '../Player/PlayerCardActions';
+import Stop from '../Player/PlayerCardActions/Stop';
 
 import { openPlayer, playStream } from '../../actions';
 
@@ -14,14 +14,14 @@ const CardAction = (props)  => {
     props.playStream(props.stream.id, ()=> {
       props.openPlayer();
     })
-    
   }
-  console.log(props)
+
   return (
         <CardActions>
           <Button onClick={handleClick} size="small" color="primary">
             {props.active ? 'Now Playing' : 'Play'}
           </Button>
+          {props.active ? <Stop /> : ''}
         </CardActions>
   );
 }

@@ -1,22 +1,22 @@
 module.exports = [
     {
         id:1,
-        name:'Potpuno Ludilo',
-        info:'Potpuno ludilo je kakofonicna buka epohalnih razmjera, rijetko vidjena u ovim prostorima internetskog bespuca. Turn on, tune in, drop out',
+        name:'Stream One',
+        info:'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         image:'/images/stream-electro.jpg',
         url:'http://rnrw.cast.addradio.de/rnrw-0169/dein80er/high/stream.mp3?'
     },
     {
         id:2,
-        name:'Kaos i Razvrat',
-        info:'Ima cega nema, a cega nema, nabavit ce se. Samo tvrdo, nista mlohavo.',
+        name:'Stream Two',
+        info:'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
         image:'/images/stream-electro.jpg',
         url:'http://rnrw.cast.addradio.de/rnrw-0169/deinurban/high/stream.mp3?'
     },
     {
         id:3,
-        name:'Semi Normalno',
-        info:'Za sve koji su ludi ali se osjecaju ko pickice ili pokusavaju zbarit normalnu butru.',
+        name:'Stream Three',
+        info:'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
         image:'/images/stream-electro.jpg',
         url:'http://rnrw.cast.addradio.de/rnrw-0169/deinlounge/high/stream.mp3'
     },

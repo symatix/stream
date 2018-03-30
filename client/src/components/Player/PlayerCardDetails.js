@@ -20,10 +20,10 @@ const PlayerCardDetails = (props) => {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent className={classes.container}>
                 <Typography paragraph variant="body2">
-                    Artist | <strong>{"Krankšvester"}</strong> 
+                    Artist | <strong>{"Radost"}</strong> 
                 </Typography>
                 <Typography paragraph variant="caption">
-                    {"Krankšvester IV"}  |  {"Kokain (Interlude)"}
+                    {"U Zoni"}  |  {"Ali Nismo"}
                 </Typography>
                 <Typography align="right">
                     <strong>{"2017"}</strong>  | Year

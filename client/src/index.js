@@ -7,7 +7,7 @@ import theme from './theme';
 import './index.css';
 import App from './components/App/App';
 
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
@@ -18,4 +18,4 @@ ReactDOM.render(
         </MuiThemeProvider>
     </Provider>
 , document.getElementById('root'));
-registerServiceWorker();
+//registerServiceWorker();

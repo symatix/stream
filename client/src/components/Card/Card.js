@@ -12,11 +12,18 @@ import CardAction from './CardAction';
 
 const styles = {
     card: {
+        position: 'relative',
         height: 380,
     },
     cardActive:{
+        position: 'relative',
         height: 380,
         backgroundColor:grey[900]
+    },
+    cardAction: {
+        position: 'absolute',
+        bottom: 10,
+        left: 5
     }
   };
 
@@ -30,7 +37,9 @@ const StreamCard = (props) => {
             <Card className={cardClass} raised={active} >
                 <CardImage src={image} alt={name} />
                 <CardInfo name={name} info={info} />
-                <CardAction stream={props.stream} active={active}/>
+                <div className={classes.cardAction}>
+                    <CardAction stream={props.stream} active={active}/>
+                </div>
             </Card>
         </Grid>
     );

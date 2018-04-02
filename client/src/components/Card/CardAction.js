@@ -17,12 +17,12 @@ const CardAction = (props)  => {
   }
 
   return (
-        <CardActions>
-          <Button onClick={handleClick} size="small" color="primary">
-            {props.active ? 'Now Playing' : 'Play'}
-          </Button>
-          {props.active ? <Stop /> : ''}
-        </CardActions>
+    <CardActions>
+      <Button onClick={handleClick} size="small" color="primary">
+        {props.active ? 'Now Playing' : 'Play'}
+      </Button>
+      {props.active ? <Stop /> : ''}
+    </CardActions>
   );
 }
 

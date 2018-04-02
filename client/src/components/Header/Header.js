@@ -23,7 +23,7 @@ const Header = (props) => {
 
     return (
       <div className={classes.root}>
-        <AppBar className={classes.positionFixed} position="absolute" color="default">
+        <AppBar className={classes.positionFixed} position="static" color="default">
           <Toolbar>
             <HeaderMenuButton />
             <HeaderTitle />

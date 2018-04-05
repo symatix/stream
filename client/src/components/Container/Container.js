@@ -22,6 +22,7 @@ const Container = (props) => {
 
 Container.propTypes = {
     streams:PropTypes.array.isRequired,
+    activeStream: PropTypes.object
 };
 
 export default Container;

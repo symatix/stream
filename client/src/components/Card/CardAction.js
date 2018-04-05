@@ -27,8 +27,9 @@ const CardAction = (props)  => {
 }
 
 CardAction.propTypes = {
-  stream:PropTypes.object.isRequired,
   openPlayer: PropTypes.func.isRequired,
+  playStream: PropTypes.func.isRequired,
+  stream: PropTypes.object.isRequired,
   active: PropTypes.bool
 };
 

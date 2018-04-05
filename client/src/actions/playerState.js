@@ -1,6 +1,5 @@
 import { PLAYER_OPEN, PLAYER_CLOSE } from '../constants';
 
-
 export const openPlayer = () => {
 	return { type: PLAYER_OPEN, payload: true };
 };

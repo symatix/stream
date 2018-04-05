@@ -7,6 +7,7 @@ import Toolbar from 'material-ui/Toolbar';
 import HeaderMenuButton from './HeaderMenuButton';
 import HeaderTitle from './HeaderTitle';
 import HeaderProfileButton from './HeaderProfileButton';
+import Meta from '../Meta/Meta';
 
 const styles = {
   root: {
@@ -27,6 +28,7 @@ const Header = (props) => {
           <Toolbar>
             <HeaderMenuButton />
             <HeaderTitle />
+            <Meta />
             <HeaderProfileButton />
           </Toolbar>
         </AppBar>

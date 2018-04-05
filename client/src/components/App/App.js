@@ -22,7 +22,9 @@ export class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Container streams={streams} activeStream={activeStream}/>
+        <Container 
+          streams={streams} 
+          activeStream={activeStream}/>
         <Player 
           streams={streams}
           stream={activeStream} 

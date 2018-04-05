@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+let sseExpress = require('sse-express');
 
 const db = require('./db');
 
@@ -52,6 +53,16 @@ app.get('/api/volume', (req, res) => {
     res.send({volume: globalVol});
 })
 
+app.get('/api/meta', sseExpress, function(req, res) {
+    res.sse('connected', {
+      artist: "Prince",
+      track: "Joeira"
+    });
+});
+
+
+
+
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
     app.use(express.static('client/build'));
@@ -63,6 +74,8 @@ if (process.env.NODE_ENV === 'production') {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
   }
+
+
 
 app.listen(PORT, () => {
     console.log(`=> server is up on port ${PORT}`);

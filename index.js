@@ -7,7 +7,7 @@ const db = require('./db');
 const PORT = process.env.PORT || 5000;
 
 // volume var
-let globalVol = 0.75;
+let globalVol = 85;
 
 app.use(bodyParser.json());
 
@@ -48,6 +48,9 @@ app.post('/api/volume', (req, res) => {
     res.send({volume: globalVol});
 })
 
+app.get('/api/volume', (req, res) => {
+    res.send({volume: globalVol});
+})
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets

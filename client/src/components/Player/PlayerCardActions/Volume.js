@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import MediaQuery from 'react-responsive';
 import IconButton from 'material-ui/IconButton';
 import VolumeUp from 'material-ui-icons/VolumeUp';
@@ -31,11 +32,14 @@ class Volume extends Component {
 
     apiVolumeChange(volume){
         this.setState({ volume });
+        console.log(volume);
+
         axios.post('/api/volume', { volume })
             .catch(err => console.log(err));
     }
 
     render(){
+        console.log("VOLUME STATE: ", this.state.volume);
         return (
             <div>
                 <IconButton color="primary" aria-label="Volume Down"  onClick={this.handleVolumeDown.bind(this)}>
@@ -59,4 +63,8 @@ class Volume extends Component {
 }
 
 
-export default Volume;
+function mapStateToProps({volume}){
+    return { volume }
+}
+
+export default connect(mapStateToProps)(Volume);

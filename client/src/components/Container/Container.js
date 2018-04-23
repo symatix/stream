@@ -1,28 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
+import StreamCard from '../StreamCard/StreamCard';
+import Controls from '../Controls/Controls';
 
-import Card from '../Card/Card';
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        paddingTop: 90
+    },
+    controls: {
+        paddingTop:30,
+        textAlign:'center'
+    }
+});
 
 const Container = (props) => {
-
-    const renderCards = () => {
-        return props.streams.map( stream => <Card 
-            key={stream.id} 
-            stream={stream} 
-            active={stream.id === props.activeStream.id ? true : false} /> 
-        )
-    }
+    const { classes, streams, activeStream } = props;
+    const active = activeStream['id'] ? true : false;
+    
     return (
-        <Grid container spacing={8}>
-            {renderCards()}
+        <div className={classes.root}>
+        <Grid container spacing={16}>
+
+            {streams.map( stream => {
+                return(
+                    <StreamCard 
+                        key={stream.id} 
+                        activeId={activeStream.id}
+                        {...stream} />
+                )
+            })}
+
         </Grid>
+        <Grid className={classes.controls} container spacing={16}>
+            <Controls active={active} />
+        </Grid>
+        </div>
     );
 }
 
 Container.propTypes = {
-    streams:PropTypes.array.isRequired,
-    activeStream: PropTypes.object
+    classes:PropTypes.object.isRequired
 };
 
-export default Container;
+export default withStyles(styles, { withTheme: true })(Container);

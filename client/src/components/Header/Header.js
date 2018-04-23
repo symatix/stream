@@ -3,41 +3,45 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
 
-import HeaderMenuButton from './HeaderMenuButton';
-import HeaderTitle from './HeaderTitle';
-import HeaderProfileButton from './HeaderProfileButton';
-import Meta from '../Meta/Meta';
+import ClientLogo from './HeaderClientLogo';
+import YammatLogo from './HeaderYammatLogo';
+
+import backgroundDesktop from './background_desk.jpg'; 
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  positionFixed: {
-    height: 64,
-    bottom:0
-  }
+	root: {
+		flexGrow: 1,
+	},
+	header: {
+		height: 160,
+		backgroundImage: `url(${backgroundDesktop})`
+	},
+	flex: {
+		flex: 1,
+	}
 };
 
 const Header = (props) => {
-    const { classes } = props;
-
-    return (
-      <div className={classes.root}>
-        <AppBar className={classes.positionFixed} position="static" color="default">
-          <Toolbar>
-            <HeaderMenuButton />
-            <HeaderTitle />
-            <Meta />
-            <HeaderProfileButton />
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
+	const { classes } = props;
+	return (
+		<div className={classes.root}>
+			<AppBar position="static" className={classes.header}>
+				<Toolbar>
+					<YammatLogo />
+					<Typography variant="title" color="inherit" className={classes.flex}>
+						{''}
+					</Typography>
+					<ClientLogo />
+				</Toolbar>
+			</AppBar>
+		</div>
+	);
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  	classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Header);

@@ -9,10 +9,11 @@ import {
 } from 'material-ui/colors';
 import { fade } from 'material-ui/styles/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
+import 'gotham-fonts/css/gotham-rounded.css';
 
 const theme = createMuiTheme({
 	spacing: spacing,
-	fontFamily: 'Roboto, sans-serif',
+	fontFamily: 'Gotham Rounded Book',
 	palette: {
         type:'dark',
 		primary: orange,

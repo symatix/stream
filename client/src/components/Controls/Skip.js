@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import SkipPrevious from 'material-ui-icons/SkipPrevious';
 import SkipNext from 'material-ui-icons/SkipNext';
-import { playStream } from '../../actions';
+import { playStream, setView } from '../../actions';
 import style from './style';
   
 class Skip extends Component {
@@ -25,7 +25,9 @@ class Skip extends Component {
                 ? 0 
                 : currentIndex + 1;
         }
+
         this.props.playStream(streams[index].id)
+        this.props.setView(index);
     }
 
     render(){
@@ -68,7 +70,8 @@ function mapStateToProps({streams, activeStream}){
 
 function mapDispatchToProps(dispatch) {
     return { 
-        playStream: bindActionCreators(playStream, dispatch)
+        playStream: bindActionCreators(playStream, dispatch),
+        setView: bindActionCreators(setView, dispatch)
     }
 }
 

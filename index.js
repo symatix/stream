@@ -54,6 +54,7 @@ app.get('/api/volume', (req, res) => {
 })
 
 app.get('/api/meta', sseExpress, function(req, res) {
+    console.log('=> sending metadata to client');
     res.sse('connected', {
       artist: "Prince",
       track: "Joeira"

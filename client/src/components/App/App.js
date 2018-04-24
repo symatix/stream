@@ -10,38 +10,19 @@ import Header from '../Header/Header'
 import Container from '../Container/Container'
 
 export class App extends Component {
-	constructor(props){
-		super(props);
-
-		this.state = { view: 0 }
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleChangeIndex = this.handleChangeIndex.bind(this);
-	}
-
 	componentWillMount(){
 		this.props.getStreams();
 	}
 
-	handleChange = (event, value) => {
-		this.setState({ view: value });
-	};
-
-	handleChangeIndex = view => {
-		this.setState({ view });
-	};
-
 
 	render() {
-	const { streams, activeStream, volume } = this.props.store;
+	const { streams, activeStream, volume, streamView } = this.props.store;
 		
 		return (
 			<div className="App">
-				<Header 
-					view={this.state.view}
-					handleViewChange={this.handleChange}/>
+				<Header />
 				<Container 
-					view={this.state.view}
+					view={streamView}
 					handleViewChange={this.handleChangeIndex}
 					streams={streams} 
 					activeStream={activeStream}

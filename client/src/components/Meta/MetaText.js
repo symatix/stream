@@ -5,8 +5,8 @@ const MetaText = props => {
     const { artist, track } = props;
 
     return (
-        <Typography noWrap={true} variant="caption" gutterBottom align="center">
-            {artist} {track}
+        <Typography style={{display: 'inline-block'}} variant="display1" align="center" color='primary' gutterBottom>
+            {artist} {artist && track ? '-' : ''} {track}
         </Typography>
     )
 }

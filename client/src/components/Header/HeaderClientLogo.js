@@ -6,8 +6,10 @@ import CocktaLogoSvg from '../../svg/cockta_logo.svg';
 
 const styles = {
 	root: {
-        position: 'relative',
-		backgroundColor: 'black',
+        position: 'absolute',
+        backgroundColor: 'black',
+        top: 0,
+        right: 15,
 		width: 160,
         height: 160
 	},

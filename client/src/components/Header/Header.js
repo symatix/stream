@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 
 import ClientLogo from './HeaderClientLogo';
 import YammatLogo from './HeaderYammatLogo';
@@ -15,11 +14,14 @@ const styles = {
 		flexGrow: 1,
 	},
 	header: {
+		position: 'relative',
 		height: 160,
 		backgroundImage: `url(${backgroundDesktop})`
 	},
 	flex: {
-		flex: 1,
+		position: 'absolute',
+		top: 0,
+		right: 15
 	}
 };
 
@@ -27,12 +29,9 @@ const Header = (props) => {
 	const { classes } = props;
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" className={classes.header}>
-				<Toolbar>
+			<AppBar position="static">
+				<Toolbar className={classes.header}>
 					<YammatLogo />
-					<Typography variant="title" color="inherit" className={classes.flex}>
-						{''}
-					</Typography>
 					<ClientLogo />
 				</Toolbar>
 			</AppBar>

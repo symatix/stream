@@ -26,7 +26,7 @@ app.post('/api/play', (req, res) => {
     const stream = db.find(stream => stream.id === req.body.id);
     //console.log('=> playing stream: ');
     const resObj = {stream: stream, volume:globalVol, meta:{}}
-    console.log(resObj);
+    console.log(`=> playing stream: ${resObj.stream.name}`);
     res.send(resObj);
 })
 

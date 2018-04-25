@@ -23,11 +23,11 @@ export class App extends Component {
 
 
 	render() {
-	const { streams, activeStream, volume, streamView, metaData } = this.props.store;
-		
+		const { streams, activeStream, volume, streamView, metaData } = this.props.store;
+		const mobile = window.innerWidth <= 768 ? true: false;
 		return (
-			<div className="App" style={window.innerWidth <= 768 ? style : {}}>
-				<Header />
+			<div className="App" style={mobile ? style : {}}>
+				{!mobile ? <Header /> : ''}
 				<Container 
 					meta={metaData}
 					view={streamView}

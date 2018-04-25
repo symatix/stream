@@ -12,20 +12,18 @@ import style from './style';
 class Skip extends Component {
 
     handleStreamChange(action){
-        const { streams, streamId } = this.props;
-        const currentIndex = _.findIndex(streams, (stream) => stream.id === streamId);
+        const { streams, streamId, streamView } = this.props;
         let index;
         if (action === 'prev'){
-            index = currentIndex - 1 < 0 
-                ? streams.length - 1 
-                : currentIndex - 1;
+            index = streamView - 1 >= 0 
+                ? streamView - 1 
+                : streams.length - 1;
         }
         if (action === 'next'){
-            index = currentIndex + 1 >= streams.length 
+            index = streamView + 1 === streams.length 
                 ? 0 
-                : currentIndex + 1;
+                : streamView + 1;
         }
-
         this.props.playStream(streams[index].id)
         this.props.setView(index);
     }
@@ -59,8 +57,9 @@ Skip.propTypes = {
 };
 
 
-function mapStateToProps({streams, activeStream}){
+function mapStateToProps({streams, activeStream, streamView}){
     return {
+        streamView,
         streams,
         streamId: activeStream.id
     }

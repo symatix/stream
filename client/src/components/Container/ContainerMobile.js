@@ -12,6 +12,8 @@ import { setView, playStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import PlaySvg from '../../svg/big_play.svg';
 
+import ClientLogo from '../Header/HeaderClientLogo';
+import YammatLogo from '../Header/HeaderYammatLogo';
 
 
 const styles = {
@@ -19,13 +21,14 @@ const styles = {
         position: 'relative',
         top: 0,
         left: 0,
+        marginTop: -15,
 		width: '100vw',
-        height: '75vh',
+        height: '100vh',
         testAlign: 'center'
     },
     button: {
         position: 'absolute',
-        top: '10%',
+        top: '20%',
         left: '50%',
         width:'100%',
         height: '100%',
@@ -36,7 +39,6 @@ const styles = {
         bottom: 0,
         left: 0,
         right: 0,
-        marginTop:30,
         textAlign:'center'
     },
     chip: {
@@ -53,6 +55,10 @@ const styles = {
 class ContainerTablet extends Component {
     state = { index: this.props.view }
 
+    handleChangeIndex = index => {
+        console.log(index)
+    }
+
     handlePlay = id => {
         this.props.playStream(id);
     }
@@ -62,10 +68,18 @@ class ContainerTablet extends Component {
         return streams.map( stream => {
             return(
                     <div key={stream.id} className={classes.root}>
+                        
+                        <YammatLogo mobile={true} />
+                        <ClientLogo mobile={true} />
+
                         <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
                             <img className={classes.action} src={PlaySvg} alt='Play' />
                         </IconButton>
-                        <Chip className={classes.chip} label={stream.name} />
+                        <Paper className={classes.controls} raised={0}>
+                            <StreamCardContent name={stream.name || ''} info={stream.info || ''} />
+                            <Controls active={this.props.active} />
+                            <br/>
+                        </Paper>
                     </div>
             )
         })
@@ -79,10 +93,6 @@ class ContainerTablet extends Component {
                     index={view}>
                     {this.renderStreamCards()}
                 </SwipeableViews>
-                <Paper className={classes.controls} raised={4}>
-                    <StreamCardContent name={activeStream.name} info={activeStream.info} />
-                    <Controls active={this.props.active} />
-                </Paper>
             </MediaQuery>
         );
     }  

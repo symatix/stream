@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
+import Grid from 'material-ui/Grid';
+import Meta from '../Meta/Meta';
+import Controls from '../Controls/Controls';
 import IconButton from 'material-ui/IconButton';
 import { setView } from '../../actions';
 
@@ -12,25 +15,27 @@ import Next from '../../svg/next.svg';
 
 
 const styles = {
+    controls: {
+        marginTop:30,
+        textAlign:'center'
+    },
+    meta: {
+        textAlign: 'center',
+    },
     navButton: {
         height: '100%',
         width: '100%'
     },
-    navContainer: {
-        position: 'absolute',
-        width: '100vw',
-        top: '40%'
-    },
     left: {
         position: 'absolute',
         top: '40%',
-        left: 20,
+        left: 30,
         zIndex: 100
     },
     right: {
         position: 'absolute',
         top: '40%',
-        right: 20,
+        right: 30,
         zIndex: 100
     }
 }
@@ -53,31 +58,47 @@ class ContainerTablet extends Component {
     };
 
     render() {
-        const { classes, children } = this.props;
+        const { classes, children, active } = this.props;
         return (
+            <MediaQuery query="(min-width: 768px)">
             <MediaQuery query="(max-width: 1224px)">
 
-                <IconButton
-                    onClick={()=> this.handleChangeIndex('prev')}
-                    className={classes.left}
-                    color="inherit" 
-                    aria-label="Previous Stream">
-                    <img className={classes.navButton} src={Prev} alt='prev-stream' />
-                </IconButton>
-                <IconButton 
-                    onClick={()=> this.handleChangeIndex('next')}
-                    className={classes.right}
-                    color="inherit" 
-                    aria-label="Next Stream">
-                    <img className={classes.navButton} src={Next} alt='next-stream' />
-                </IconButton>
+                <Grid container justify='center' spacing={16}>
+                    <Grid item className={classes.meta}>
+                        <Meta />
+                    </Grid>
+                </Grid>
 
-                <SwipeableViews
-                    index={this.props.view}
-                    onChangeIndex={this.handleChangeIndex}>
-                    {children}
-                </SwipeableViews>
+                <Grid container justify='center' spacing={16}>
+                    <IconButton
+                        onClick={()=> this.handleChangeIndex('prev')}
+                        className={classes.left}
+                        color="secondary" 
+                        aria-label="Previous Stream">
+                        <img className={classes.navButton} src={Prev} alt='prev-stream' />
+                    </IconButton>
+                    <IconButton 
+                        onClick={()=> this.handleChangeIndex('next')}
+                        className={classes.right}
+                        color="primary" 
+                        aria-label="Next Stream">
+                        <img className={classes.navButton} src={Next} alt='next-stream' />
+                    </IconButton>
 
+                    <SwipeableViews
+                        index={this.props.view}
+                        onChangeIndex={this.handleChangeIndex}>
+                        {children}
+                    </SwipeableViews>
+                </Grid>
+
+
+            <Grid className={classes.controls} container spacing={16}>
+                <Controls active={active} />
+            </Grid>
+            
+
+            </MediaQuery>
             </MediaQuery>
         );
     }  

@@ -1,35 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
-import CocktaLogoSvg from '../../svg/cockta_logo.svg';
 
 const styles = {
-	root: {
+    holder: {
         position: 'absolute',
         backgroundColor: 'black',
         top: 0,
-        right: 15,
+        right: 20,
+    },
+	lgHolder: {
 		width: 160,
         height: 160
-	},
+    },
+    smHolder: {
+		width: 130,
+        height: 130
+    },
 	logo: {
-        position: 'absolute',
-        top: '60%',
-        left: '20%',
-		width: 150,
-        height: 'auto',
-        margin: '0 auto'
+        margin: '15%',
+        width: '70%',
+        height: '70%'
 	}
 };
 
 const HeaderClientLogo = (props) => {
-	const { classes } = props;
+	const { classes, mobile } = props;
 	return (
-        <div className={classes.root}>
-            <IconButton aria-label="Menu">
-                <img className={classes.logo} src={CocktaLogoSvg} alt='cockta-logo' />
-            </IconButton>
+        <div className={mobile 
+            ? [classes.holder, classes.smHolder].join(' ')
+            : [classes.holder, classes.lgHolder].join(' ')}>
+            <img className={classes.logo} src="/images/client.png" alt='client-logo' />
         </div>
 	);
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
-import Meta from '../Meta/Meta';
 import StreamCard from '../StreamCard/StreamCard';
-import Controls from '../Controls/Controls';
 
 import ContainerDesktop from './ContainerDesktop';
 import ContainerTablet from './ContainerTablet';
+import ContainerMobile from './ContainerMobile';
 
 
 const styles = theme => ({
@@ -42,22 +40,9 @@ const Container = (props) => {
 
     return (
         <div className={classes.root}>
-            {/*meta data*/}
-            <Grid container justify='center' spacing={16}>
-                <Grid item className={classes.meta}>
-                    <Meta />
-                </Grid>
-            </Grid>
-
-            <Grid container justify='center' spacing={16}>
-                {/*desktop view*/}
-                <ContainerDesktop children={renderStreamCards()} />
-                <ContainerTablet children={renderStreamCards()} view={view} /> 
-                
-            </Grid>
-            <Grid className={classes.controls} container spacing={16}>
-                <Controls active={active} />
-            </Grid>
+            <ContainerDesktop children={renderStreamCards()} active={active}/>
+            <ContainerTablet children={renderStreamCards()} active={active} view={view} /> 
+            <ContainerMobile streams={streams} active={active} view={view} activeStream={activeStream}/> 
         </div>
     );
 }

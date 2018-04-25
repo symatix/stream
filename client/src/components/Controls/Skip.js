@@ -35,7 +35,6 @@ class Skip extends Component {
             <div style={{display:'inline-block'}}>
 
                 <IconButton 
-                    style={style.iconHolder}
                     color="primary" 
                     aria-label="Prev Stream" 
                     onClick={() => this.handleStreamChange("prev")}>
@@ -43,7 +42,6 @@ class Skip extends Component {
                 </IconButton>
 
                 <IconButton 
-                    style={style.iconHolder}
                     color="primary" 
                     aria-label="Next Stream" 
                     onClick={() => this.handleStreamChange("next")}>

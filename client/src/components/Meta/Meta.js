@@ -25,19 +25,19 @@ class Meta extends Component {
             axios
                 .get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${meta.artist}&api_key=${conf.lastFM_API}&format=json`)
                 .then(res => {
-                    meta.image = res.data.artist.image[1]['#text'];
+                    meta.imgSmall = res.data.artist.image[1]['#text'];
+                    meta.imgBig = res.data.artist.image[3]['#text'];
                     this.props.getMeta(meta);
                 }).catch(e => console.log(e))
-
         })
     }
 
     renderMeta(){
         if(this.props.metaData){
-            const {artist, track, image} = this.props.metaData;
+            const {artist, track, imgSmall} = this.props.metaData;
             return(
                 <div>
-                    <MetaImg artist={artist} image={image} />
+                    <MetaImg artist={artist} image={imgSmall} />
                     <MetaText artist={artist} track={track} />
                 </div>
             )

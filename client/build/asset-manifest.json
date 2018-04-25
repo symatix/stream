@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.c4f9f922.css",
   "main.css.map": "static/css/main.c4f9f922.css.map",
-  "main.js": "static/js/main.718083b6.js",
-  "main.js.map": "static/js/main.718083b6.js.map",
+  "main.js": "static/js/main.bef2e749.js",
+  "main.js.map": "static/js/main.bef2e749.js.map",
   "static\\media\\GothamRounded-Bold.eot": "static/media/GothamRounded-Bold.522ba9ca.eot",
   "static\\media\\GothamRounded-Bold.svg": "static/media/GothamRounded-Bold.cb719d96.svg",
   "static\\media\\GothamRounded-Bold.ttf": "static/media/GothamRounded-Bold.b426f8dc.ttf",
@@ -30,6 +30,7 @@
   "static\\media\\VarelaRound.woff2": "static/media/VarelaRound.8131f671.woff2",
   "static\\media\\background_desk.jpg": "static/media/background_desk.96144d7e.jpg",
   "static\\media\\big_play.svg": "static/media/big_play.f8dbf9b0.svg",
-  "static\\media\\cockta_logo.svg": "static/media/cockta_logo.060b1fe1.svg",
+  "static\\media\\next.svg": "static/media/next.9edc0ab9.svg",
+  "static\\media\\prev.svg": "static/media/prev.55afec9a.svg",
   "static\\media\\yammat_logo.svg": "static/media/yammat_logo.34429cf9.svg"
 }

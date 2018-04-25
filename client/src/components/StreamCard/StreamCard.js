@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Card, { CardMedia } from 'material-ui/Card';
 
@@ -16,11 +17,17 @@ const styles = {
 	card: {
 		position: 'relative',
 		width: 500,
-		height:500,
+		height: 500,
 		transition: 'all .2s',
 		'&:hover':{
 			transform:'scale(1.05)'
 		}
+	},
+	action: {
+		display: 'flex',
+		position: 'absolute',
+		top: '30%',
+        left: '50%',
 	},
 	active: {
 		transform: 'scale(1.05)'
@@ -36,9 +43,8 @@ const styles = {
 };
 
 const StreamCard = (props) => {
-	const { classes, name, info, id, activeId } = props;
-
-	
+	const { classes, name, info, id, activeId, metaData: { imgBig } } = props;
+	const background = imgBig || "/images/player_desktop_background.jpg";
 	
 	return (
 		<Grid className={classes.root} item lg={4} >
@@ -49,11 +55,11 @@ const StreamCard = (props) => {
 					: [classes.card, classes.inActive].join(' ')
 				: classes.card}>
 				
-				<StreamCardAction id={id} />
+				<StreamCardAction className={classes.action} id={id} />
 				
 				<CardMedia
 					className={classes.media}
-					image="/images/player_desktop_background.jpg"
+					image={activeId === id ? background : "/images/player_desktop_background.jpg"}
 					title="Player"/>
 
 				<StreamCardContent
@@ -73,4 +79,8 @@ StreamCard.propTypes = {
 	activeId: PropTypes.number
 };
 
-export default withStyles(styles)(StreamCard);
+function mapStateToProps({ metaData }){
+	return { metaData }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(StreamCard));

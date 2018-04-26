@@ -11,7 +11,7 @@ import Paper from 'material-ui/Paper';
 import { setView, playStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import PlaySvg from '../../svg/big_play.svg';
-import PauseSvg from '../../svg/pause.svg';
+import Pause from '../Controls/BtnPause';
 
 import ClientLogo from '../Header/HeaderClientLogo';
 import YammatLogo from '../Header/HeaderYammatLogo';
@@ -74,18 +74,26 @@ class ContainerTablet extends Component {
     }
 
     handlePlay = id => {
-        this.props.playStream(id);
+        if (this.props.activeId === id){
+            return this.props.playStream();
+        }
+        return this.props.playStream(id);
     }
 
     renderStreamCards(){
-        const { streams, classes } = this.props;
+        const { streams, activeId, classes } = this.props;
         return streams.map( stream => {
+            
+            const button = activeId === stream.id ? Pause : PlaySvg;
             return(
                     <div key={stream.id} className={classes.playHolder}>
                         
 
                         <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
-                            <img className={classes.action} src={PlaySvg} alt='Play' />
+                            {activeId === stream.id
+                            ? <Pause />
+                            : <img className={classes.action} src={button} alt='Play' />}
+                            
                         </IconButton>
                     </div>
             )
@@ -95,26 +103,19 @@ class ContainerTablet extends Component {
         this.setState({index})
     }
 
-    getName(){
-        let name = '';
-        if (this.props.streams[0]){
-            name = this.props.streams[this.state.index].name;
-        }
-        console.log(name)
-        return name;
-    }
     getInfo(){
         let info = '';
         if (this.props.streams[0]){
-            info = this.props.streams[this.state.index].info;
+            return [
+                this.props.streams[this.state.index].name,
+                this.props.streams[this.state.index].info
+            ]
         }
-        console.log(info)
-        return info;
+        return ['', ''];
     }
 
     render() {
         const { view, activeStream, streams, classes } = this.props;
-        console.log(streams)
         return (
             <MediaQuery query="(max-width: 767px)">
                 <div className={classes.root}>
@@ -126,7 +127,7 @@ class ContainerTablet extends Component {
                         {this.renderStreamCards()}
                     </SwipeableViews>
                         <Paper className={classes.controls} raised={0}>
-                            <StreamCardContent name={this.getName()} info={this.getInfo()} />
+                            <StreamCardContent name={this.getInfo()[0]} info={this.getInfo()[1]} />
                             <Controls active={this.props.active} />
                             <br/>
                         </Paper>

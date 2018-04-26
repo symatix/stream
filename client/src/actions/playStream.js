@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const playStream = (id, cb) => dispatch => {
     if (!id) {
-        return axios.post('/api/stop', { player: false }).then(res => {
+        return axios.post('/api/stop', { player: true }).then(res => {
             dispatch({ type: PLAY_STREAM, payload: {} })
         }).catch(e => console.log(e));
         

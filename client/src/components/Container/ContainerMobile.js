@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { virtualize } from 'react-swipeable-views-utils';
 import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
 import Controls from '../Controls/Controls';
 import IconButton from 'material-ui/IconButton';
-import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import { setView, playStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
+import Pagination from '../Pagination/Pagination';
 import PlaySvg from '../../svg/big_play.svg';
 import Pause from '../Controls/BtnPause';
 
@@ -43,6 +44,7 @@ const styles = {
     },
     controls: {
         position:' absolute',
+        paddingTop:25,
         bottom: 0,
         left: 0,
         right: 0,
@@ -83,22 +85,18 @@ class ContainerTablet extends Component {
     renderStreamCards(){
         const { streams, activeId, classes } = this.props;
         return streams.map( stream => {
-            
-            const button = activeId === stream.id ? Pause : PlaySvg;
             return(
-                    <div key={stream.id} className={classes.playHolder}>
-                        
-
-                        <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
-                            {activeId === stream.id
-                            ? <Pause />
-                            : <img className={classes.action} src={button} alt='Play' />}
-                            
-                        </IconButton>
-                    </div>
+                <div key={stream.id} className={classes.playHolder}>
+                    <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
+                        {activeId === stream.id
+                        ? <Pause />
+                        : <img className={classes.action} src={PlaySvg} alt='Play' />}                      
+                    </IconButton>
+                </div>
             )
         })
     }
+
     handleSwipe(index){
         this.setState({index})
     }
@@ -121,12 +119,16 @@ class ContainerTablet extends Component {
                 <div className={classes.root}>
                     <YammatLogo mobile={true} />
                     <ClientLogo mobile={true} />
+                    
                     <SwipeableViews
-                        index={view}
+                        index={this.state.index}
                         onChangeIndex={this.handleSwipe}>
                         {this.renderStreamCards()}
+                        
                     </SwipeableViews>
+                    
                         <Paper className={classes.controls} raised={0}>
+                            <Pagination dots={3} index={this.state.index} onChangeIndex={this.handleSwipe} />
                             <StreamCardContent name={this.getInfo()[0]} info={this.getInfo()[1]} />
                             <Controls active={this.props.active} />
                             <br/>

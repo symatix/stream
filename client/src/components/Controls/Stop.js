@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui-icons/PlayArrow';
 import Pause from 'material-ui-icons/Pause';
 import Alert from '../Alert/Alert';
 import style from './style';
+import { playStream } from '../../actions';
 
 class Stop extends Component {
     state = { 
@@ -18,6 +21,8 @@ class Stop extends Component {
 
     handlePlay() {
         if (this.props.active) {
+            if (this.state.playing) this.props.playStream();
+
             axios.post('/api/stop', { player: this.state.playing })
                 .then(res => {
                     if (res.data === true){
@@ -43,6 +48,10 @@ class Stop extends Component {
     } 
 }
 
-// props.active
+function mapDispatchToProps(dispatch){
+    return { 
+        playStream: bindActionCreators(playStream, dispatch)
+    }
+}
 
-export default Stop;
+export default connect(null, mapDispatchToProps)(Stop);

@@ -44,7 +44,7 @@ class Volume extends Component {
                 <IconButton style={style.iconHolder} color="primary" aria-label="Volume Down"  onClick={this.handleVolumeDown.bind(this)}>
                     <VolumeDown style={style.icon} />
                 </IconButton>
-                <MediaQuery query="(min-device-width: 1224px)">
+                <MediaQuery query="(min-width: 1224px)">
                     <input
                         type='range'
                         min={50}

@@ -1,4 +1,4 @@
-import { playStream } from './playStream';
+import { playStream, stopStream } from './playStream';
 import { openPlayer, closePlayer } from './playerState';
 import { nextStream, prevStream } from './playerState';
 import { getStreams } from './getStreams';
@@ -7,6 +7,7 @@ import { getMeta } from './getMeta';
 
 export {
     playStream,
+    stopStream,
     openPlayer,
     closePlayer,
     nextStream, 

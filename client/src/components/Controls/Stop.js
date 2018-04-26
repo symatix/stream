@@ -7,7 +7,7 @@ import PlayArrow from 'material-ui-icons/PlayArrow';
 import Pause from 'material-ui-icons/Pause';
 import Alert from '../Alert/Alert';
 import style from './style';
-import { playStream } from '../../actions';
+import { playStream, stopStream } from '../../actions';
 
 class Stop extends Component {
     state = { 
@@ -20,22 +20,17 @@ class Stop extends Component {
     }
 
     handlePlay() {
-        if (this.props.active) {
-            if (this.state.playing) this.props.playStream();
-
-            axios.post('/api/stop', { player: this.state.playing })
-                .then(res => {
-                    if (res.data === true){
-                        this.setState({ playing: !this.state.playing })
-                    }
-                }).catch( err => console.log(err));
-        } else {
+        // if player is playing, send a stop command
+        if (!this.props.active && !this.state.playing){
             this.setState({alert: true});
             setTimeout(() => {
                 this.setState({alert: false})
             }, 2000)
+        } else {
+            axios.post('/api/stop', { player: this.state.playing })
+                .then(res => this.setState({playing: !this.state.playing}))
+                .catch(e => console.log(e));
         }
-        
     }
 
     render(){
@@ -50,7 +45,8 @@ class Stop extends Component {
 
 function mapDispatchToProps(dispatch){
     return { 
-        playStream: bindActionCreators(playStream, dispatch)
+        playStream: bindActionCreators(playStream, dispatch),
+        stopStream: bindActionCreators(stopStream, dispatch),
     }
 }
 

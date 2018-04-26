@@ -8,10 +8,11 @@ import SwipeableViews from 'react-swipeable-views';
 import Controls from '../Controls/Controls';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
-import { setView, playStream } from '../../actions';
+import { setView, playStream, stopStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import Pagination from '../Pagination/Pagination';
 import PlaySvg from '../../svg/big_play.svg';
+import PauseSvg from '../../svg/pause.svg';
 import Pause from '../Controls/BtnPause';
 
 import ClientLogo from '../Header/HeaderClientLogo';
@@ -77,7 +78,7 @@ class ContainerTablet extends Component {
 
     handlePlay = id => {
         if (this.props.activeId === id){
-            return this.props.playStream();
+            return this.props.stopStream();
         }
         return this.props.playStream(id);
     }
@@ -89,8 +90,8 @@ class ContainerTablet extends Component {
                 <div key={stream.id} className={classes.playHolder}>
                     <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
                         {activeId === stream.id
-                        ? <Pause />
-                        : <img className={classes.action} src={PlaySvg} alt='Play' />}                      
+                        ? <img src={PauseSvg} alt='Stop' style={{width:'50%'}}/>
+                        : <img src={PlaySvg} alt='Play' />}                      
                     </IconButton>
                 </div>
             )
@@ -143,7 +144,8 @@ class ContainerTablet extends Component {
 function mapDispatchToProps(dispatch){
     return { 
         setView: bindActionCreators(setView, dispatch),
-        playStream: bindActionCreators(playStream, dispatch)
+        playStream: bindActionCreators(playStream, dispatch),
+        stopStream: bindActionCreators(stopStream, dispatch)
     }
 }
 

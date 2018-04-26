@@ -6,7 +6,8 @@ import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import PlaySvg from '../../svg/big_play.svg';
 import PauseSvg from '../../svg/pause.svg';
-import { playStream } from '../../actions';
+import Pause from '../Controls/BtnPause';
+import { playStream, stopStream } from '../../actions';
 
 const styles = {
 	root: {
@@ -24,18 +25,21 @@ const styles = {
 };
 
 const StreamCardAction = (props) => {
-    const { classes, id, playStream, isActive } = props;
+    const { classes, id, playStream, stopStream, isActive } = props;
     
     const handlePlay = () => {
-        if (isActive) {
-            return playStream()
-        }
-        return playStream(id);
+        playStream(id);
+    }
+    const handleStop = () => {
+        stopStream();
     }
 
 	return (
         <IconButton className={classes.root} aria-label="Menu">
-            <img className={classes.button} src={isActive ? PauseSvg : PlaySvg} alt='Play' onClick={handlePlay} />
+        {/*isActive 
+            ? <img className={classes.button} src={PauseSvg} alt='Stop' onClick={handleStop} />
+        : <img className={classes.button} src={PlaySvg} alt='Play' onClick={handlePlay} />*/}
+            <img className={classes.button} src={PlaySvg} alt='Play' onClick={handlePlay} />
         </IconButton>
 	);
 }
@@ -47,7 +51,8 @@ StreamCardAction.propTypes = {
 
 function mapDispatchToProps(dispatch) {
     return { 
-        playStream: bindActionCreators(playStream, dispatch)
+        playStream: bindActionCreators(playStream, dispatch),
+        stopStream: bindActionCreators(stopStream, dispatch)
     }
 }
 

@@ -10,8 +10,7 @@ import ContainerMobile from './ContainerMobile';
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        paddingTop: 20
+        flexGrow: 1
     },
     controls: {
         marginTop:30,
@@ -40,9 +39,9 @@ const Container = (props) => {
 
     return (
         <div className={classes.root}>
-            <ContainerDesktop children={renderStreamCards()} active={active}/>
-            <ContainerTablet children={renderStreamCards()} active={active} view={view} /> 
-            <ContainerMobile streams={streams} active={active} view={view} activeStream={activeStream}/> 
+            <ContainerDesktop children={renderStreamCards()} active={active} activeId={activeStream.id}/>
+            <ContainerTablet children={renderStreamCards()} active={active} view={view} activeId={activeStream.id}/> 
+            <ContainerMobile streams={streams} active={active} view={view} activeStream={activeStream} activeId={activeStream.id}/> 
         </div>
     );
 }

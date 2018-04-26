@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import PlaySvg from '../../svg/big_play.svg';
+import PauseSvg from '../../svg/pause.svg';
 import { playStream } from '../../actions';
 
 const styles = {
@@ -23,15 +24,18 @@ const styles = {
 };
 
 const StreamCardAction = (props) => {
-    const { classes, id, playStream } = props;
+    const { classes, id, playStream, isActive } = props;
     
     const handlePlay = () => {
-        playStream(id);
+        if (isActive) {
+            return playStream()
+        }
+        return playStream(id);
     }
 
 	return (
         <IconButton className={classes.root} aria-label="Menu">
-            <img className={classes.button} src={PlaySvg} alt='Play' onClick={handlePlay} />
+            <img className={classes.button} src={isActive ? PauseSvg : PlaySvg} alt='Play' onClick={handlePlay} />
         </IconButton>
 	);
 }

@@ -55,7 +55,7 @@ const StreamCard = (props) => {
 					: [classes.card, classes.inActive].join(' ')
 				: classes.card}>
 				
-				<StreamCardAction className={classes.action} id={id} />
+				<StreamCardAction isActive={activeId === id ? true : false} className={classes.action} id={id} />
 				
 				<CardMedia
 					className={classes.media}

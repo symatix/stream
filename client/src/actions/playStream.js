@@ -2,9 +2,12 @@ import { PLAY_STREAM, SET_VOLUME } from '../constants';
 import axios from 'axios';
 
 export const playStream = (id, cb) => dispatch => {
-    
-    axios.get('/api/meta').catch(e => console.log(e))
-
+    if (!id) {
+        return axios.post('/api/stop', { player: false }).then(res => {
+            dispatch({ type: PLAY_STREAM, payload: {} })
+        }).catch(e => console.log(e));
+        
+    }
     return axios.post('/api/play', { id })
         .then(res => {
 			dispatch({ type: PLAY_STREAM, payload: res.data.stream });

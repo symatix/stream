@@ -11,6 +11,7 @@ import Paper from 'material-ui/Paper';
 import { setView, playStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import PlaySvg from '../../svg/big_play.svg';
+import PauseSvg from '../../svg/pause.svg';
 
 import ClientLogo from '../Header/HeaderClientLogo';
 import YammatLogo from '../Header/HeaderYammatLogo';
@@ -21,10 +22,16 @@ const styles = {
         position: 'relative',
         top: 0,
         left: 0,
-        marginTop: -15,
 		width: '100vw',
         height: '100vh',
         testAlign: 'center'
+    },
+    playHolder: {
+        position: 'relative',
+        display: 'block',
+        width: '100%',
+        height: 300,
+        zIndex: 100
     },
     button: {
         position: 'absolute',
@@ -53,10 +60,17 @@ const styles = {
 }
 
 class ContainerTablet extends Component {
-    state = { index: this.props.view }
+    constructor(props){
+        super(props);
+        this.state = { index: this.props.view }
 
-    handleChangeIndex = index => {
-        console.log(index)
+        this.handleSwipe = this.handleSwipe.bind(this)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if (this.props.view !== nextProps.view){
+            this.setState({index: nextProps.view})
+        }
     }
 
     handlePlay = id => {
@@ -67,32 +81,56 @@ class ContainerTablet extends Component {
         const { streams, classes } = this.props;
         return streams.map( stream => {
             return(
-                    <div key={stream.id} className={classes.root}>
+                    <div key={stream.id} className={classes.playHolder}>
                         
-                        <YammatLogo mobile={true} />
-                        <ClientLogo mobile={true} />
 
                         <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
                             <img className={classes.action} src={PlaySvg} alt='Play' />
                         </IconButton>
-                        <Paper className={classes.controls} raised={0}>
-                            <StreamCardContent name={stream.name || ''} info={stream.info || ''} />
-                            <Controls active={this.props.active} />
-                            <br/>
-                        </Paper>
                     </div>
             )
         })
     }
+    handleSwipe(index){
+        this.setState({index})
+    }
+
+    getName(){
+        let name = '';
+        if (this.props.streams[0]){
+            name = this.props.streams[this.state.index].name;
+        }
+        console.log(name)
+        return name;
+    }
+    getInfo(){
+        let info = '';
+        if (this.props.streams[0]){
+            info = this.props.streams[this.state.index].info;
+        }
+        console.log(info)
+        return info;
+    }
 
     render() {
-        const { view, activeStream, classes } = this.props;
+        const { view, activeStream, streams, classes } = this.props;
+        console.log(streams)
         return (
             <MediaQuery query="(max-width: 767px)">
-                <SwipeableViews
-                    index={view}>
-                    {this.renderStreamCards()}
-                </SwipeableViews>
+                <div className={classes.root}>
+                    <YammatLogo mobile={true} />
+                    <ClientLogo mobile={true} />
+                    <SwipeableViews
+                        index={view}
+                        onChangeIndex={this.handleSwipe}>
+                        {this.renderStreamCards()}
+                    </SwipeableViews>
+                        <Paper className={classes.controls} raised={0}>
+                            <StreamCardContent name={this.getName()} info={this.getInfo()} />
+                            <Controls active={this.props.active} />
+                            <br/>
+                        </Paper>
+                </div>
             </MediaQuery>
         );
     }  

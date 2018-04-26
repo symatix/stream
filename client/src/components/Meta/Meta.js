@@ -30,6 +30,7 @@ class Meta extends Component {
                     this.props.getMeta(meta);
                 }).catch(e => console.log(e))
         })
+        axios.get('/api/meta').catch(e => console.log(e))
     }
 
     renderMeta(){

@@ -4,6 +4,7 @@ const app = express();
 let sseExpress = require('sse-express');
 
 const db = require('./db');
+const meta = require('./db/meta');
 
 const PORT = process.env.PORT || 5000;
 
@@ -55,10 +56,21 @@ app.get('/api/volume', (req, res) => {
 
 app.get('/api/meta', sseExpress, function(req, res) {
     console.log('=> sending metadata to client');
-    res.sse('connected', {
-      artist: "Prince",
-      track: "Joeira"
-    });
+
+    setTimeout(() => {
+        res.sse('connected', meta[0]);
+    }, 10000)
+    setTimeout(() => {
+        res.sse('connected', meta[1]);
+    }, 20000)
+    setTimeout(() => {
+        res.sse('connected', meta[2]);
+    }, 30000)
+    setTimeout(() => {
+        res.sse('connected', meta[3]);
+    }, 40000)
+
+
 });
 
 

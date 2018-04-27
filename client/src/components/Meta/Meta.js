@@ -21,6 +21,7 @@ class Meta extends Component {
         const { source } = this.state;
         source.addEventListener('connected', ({ data }) => {
             let meta = JSON.parse(data);
+            console.log(meta)
             axios
                 .get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${meta.artist}&api_key=${conf.lastFM_API}&format=json`)
                 .then(res => {
@@ -29,11 +30,6 @@ class Meta extends Component {
                     this.props.getMeta(meta);
                 }).catch(e => console.log(e))
         })
-        
-        setInterval(()=>{
-            console.log("GO!")
-            axios.post('/api/meta', {id: this.props.activeStream.id}).catch(e => console.log(e))
-        }, 60000)
     }
 
     renderMeta(){

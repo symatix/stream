@@ -26,8 +26,8 @@ const styles = {
 	action: {
 		display: 'flex',
 		position: 'absolute',
-		top: '30%',
-        left: '50%',
+		top: 100,
+        left: 100,
 	},
 	active: {
 		transform: 'scale(1.05)'

@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { virtualize } from 'react-swipeable-views-utils';
 import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
 import Controls from '../Controls/Controls';
-import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import { setView, playStream, stopStream } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import Pagination from '../Pagination/Pagination';
-import PlaySvg from '../../svg/big_play.svg';
-import PauseSvg from '../../svg/pause.svg';
-import Pause from '../Controls/BtnPause';
+import BigButton from '../Button/BigButton';
 
 import ClientLogo from '../Header/HeaderClientLogo';
 import YammatLogo from '../Header/HeaderYammatLogo';
@@ -33,7 +29,8 @@ const styles = {
         display: 'block',
         width: '100%',
         height: 300,
-        zIndex: 100
+        zIndex: 100,
+        marginTop: '-100px'
     },
     button: {
         position: 'absolute',
@@ -68,6 +65,7 @@ class ContainerTablet extends Component {
         this.state = { index: this.props.view }
 
         this.handleSwipe = this.handleSwipe.bind(this)
+        this.handlePlay = this.handlePlay.bind(this)
     }
 
     componentWillReceiveProps(nextProps){
@@ -88,11 +86,7 @@ class ContainerTablet extends Component {
         return streams.map( stream => {
             return(
                 <div key={stream.id} className={classes.playHolder}>
-                    <IconButton className={classes.button} aria-label="Menu" onClick={() => this.handlePlay(stream.id)}>
-                        {activeId === stream.id
-                        ? <img src={PauseSvg} alt='Stop' style={{width:'50%'}}/>
-                        : <img src={PlaySvg} alt='Play' />}                      
-                    </IconButton>
+                    <BigButton func={this.handlePlay} play={activeId === stream.id} id={stream.id}/>
                 </div>
             )
         })
@@ -103,7 +97,6 @@ class ContainerTablet extends Component {
     }
 
     getInfo(){
-        let info = '';
         if (this.props.streams[0]){
             return [
                 this.props.streams[this.state.index].name,
@@ -114,7 +107,7 @@ class ContainerTablet extends Component {
     }
 
     render() {
-        const { view, activeStream, streams, classes } = this.props;
+        const { classes } = this.props;
         return (
             <MediaQuery query="(max-width: 767px)">
                 <div className={classes.root}>

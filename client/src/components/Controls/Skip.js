@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,7 +11,7 @@ import style from './style';
 class Skip extends Component {
 
     handleStreamChange(action){
-        const { streams, streamId, streamView } = this.props;
+        const { streams, streamView } = this.props;
         let index;
         if (action === 'prev'){
             index = streamView - 1 >= 0 

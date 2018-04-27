@@ -7,7 +7,11 @@ import SkipPrevious from 'material-ui-icons/SkipPrevious';
 import SkipNext from 'material-ui-icons/SkipNext';
 import { playStream, setView } from '../../actions';
 import style from './style';
+
+import PreviousSvg from '../../svg/ctrl_previous.svg';
+import NextSvg from '../../svg/ctrl_skip.svg';
   
+
 class Skip extends Component {
 
     handleStreamChange(action){
@@ -35,14 +39,14 @@ class Skip extends Component {
                     color="primary" 
                     aria-label="Prev Stream" 
                     onClick={() => this.handleStreamChange("prev")}>
-                    <SkipPrevious style={style.icon}/>
+                    <img style={style.icon} src={PreviousSvg} alt="previous" />
                 </IconButton>
 
                 <IconButton 
                     color="primary" 
                     aria-label="Next Stream" 
                     onClick={() => this.handleStreamChange("next")}>
-                    <SkipNext style={style.icon}/>
+                    <img style={style.icon} src={NextSvg} alt="next" />
                 </IconButton>
             </div>
         );

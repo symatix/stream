@@ -12,7 +12,7 @@ const StreamCardContent = (props) => {
                 <strong>{name}</strong>
             </Typography>
             <Typography component="p" color='primary'>
-                <strong>{info}</strong>
+                {info}
             </Typography>
         </CardContent>
 	);

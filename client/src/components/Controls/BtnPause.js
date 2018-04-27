@@ -1,5 +1,4 @@
 import React from 'react';
-import IconButton from 'material-ui/IconButton';
 import PauseSvg from '../../svg/pause.svg';
 
 const style = {

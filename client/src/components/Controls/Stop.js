@@ -9,6 +9,9 @@ import Alert from '../Alert/Alert';
 import style from './style';
 import { playStream, stopStream } from '../../actions';
 
+import PlaySvg from '../../svg/play.svg';
+import StopSvg from '../../svg/pause.svg';
+
 class Stop extends Component {
     state = { 
         playing: this.props.active,
@@ -36,7 +39,9 @@ class Stop extends Component {
     render(){
         return (
             <IconButton style={style.iconHolder} color="primary" aria-label="Play/Pause" onClick={this.handlePlay.bind(this)} >
-                {this.state.playing ? <Pause  style={style.icon}/> : <PlayArrow  style={style.icon}/>}
+                {this.state.playing 
+                    ? <img src={StopSvg} atl="stop" style={style.icon}/> 
+                    : <img src={PlaySvg} alt="play" style={style.icon}/>}
                 <Alert message={'Please select a stream first'} open={this.state.alert}/>
             </IconButton>
         );

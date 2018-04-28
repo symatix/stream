@@ -55,20 +55,18 @@ app.get('/api/volume', (req, res) => {
 })
 
 app.get('/api/meta', sseExpress, function(req, res) {
-    console.log('=> sending metadata to client');
-
-    setTimeout(() => {
-        res.sse('connected', meta[0]);
-    }, 10000)
-    setTimeout(() => {
-        res.sse('connected', meta[1]);
-    }, 20000)
-    setTimeout(() => {
-        res.sse('connected', meta[2]);
-    }, 30000)
-    setTimeout(() => {
-        res.sse('connected', meta[3]);
-    }, 40000)
+    var interval = null;
+    var i = 0;
+    var sendMeta = function(){
+        if(i < meta.length) {
+            console.log('=> sending metadata', new Date().toLocaleString());
+            res.sse('connected', meta[i]);
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    };
+    interval = setInterval(sendMeta, 10000);
 
 
 });

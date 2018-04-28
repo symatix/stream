@@ -1,10 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MediaQuery from 'react-responsive';
 import IconButton from 'material-ui/IconButton';
-import VolumeUp from 'material-ui-icons/VolumeUp';
-import VolumeDown from 'material-ui-icons/VolumeDown';
 import style from './style';
 import Speaker0 from '../../svg/ctrl_speaker0.svg'
 import Speaker1 from '../../svg/ctrl_speaker1.svg'
@@ -13,8 +10,6 @@ import Speaker3 from '../../svg/ctrl_speaker3.svg'
 import Speaker4 from '../../svg/ctrl_speaker4.svg'
 import VolDown from '../../svg/ctrl_minus.svg'
 import VolUp from '../../svg/ctrl_plus.svg'
-
-import './VolumeSlider.css'
 
 
 class Volume extends Component {
@@ -61,7 +56,7 @@ class Volume extends Component {
                 <IconButton style={style.iconHolder} color="primary" aria-label="Volume Down"  onClick={this.handleVolumeDown.bind(this)}>
                     <img src={VolDown} alt="volume-down" style={style.icon} />
                 </IconButton>
-                <IconButton style={style.iconHolder} color="primary" aria-label="Volume">
+                <IconButton disabled style={style.iconHolder} color="primary" aria-label="Volume">
                     {this.renderSpeaker()}
                 </IconButton>
                 <IconButton style={style.iconHolder} color="primary" aria-label="Volume Up"  onClick={this.handleVolumeUp.bind(this)}>

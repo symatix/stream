@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import PauseSvg from '../../svg/pause.svg';
 import PlaySvg from '../../svg/play.svg';
@@ -22,7 +23,7 @@ const style = {
 
 const BigButton = (props) => {
     let button, label;  
-    if(props.play) {
+    if(props.player && props.activeId === props.id) {
         button = PauseSvg;
         label = "Pause"
     } else {
@@ -36,7 +37,7 @@ const BigButton = (props) => {
         }
         return props.func();
     }
-
+    
     return(
         <IconButton style={style.root} aria-label={label} onClick={handlePlay}>
             <img style={style.button} src={button} alt={label} /> 
@@ -49,4 +50,7 @@ BigButton.propTypes = {
     func:PropTypes.func
 };
 
-export default BigButton;
+function mapStateToProps({player, activeStream}){
+    return { player, activeId: activeStream.id }
+}
+export default connect(mapStateToProps)(BigButton);

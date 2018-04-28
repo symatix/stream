@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
-import SkipPrevious from 'material-ui-icons/SkipPrevious';
-import SkipNext from 'material-ui-icons/SkipNext';
-import { playStream, setView } from '../../actions';
+import { playStream, setView, playerState } from '../../actions';
 import style from './style';
 
 import PreviousSvg from '../../svg/ctrl_previous.svg';
@@ -29,6 +27,7 @@ class Skip extends Component {
         }
         this.props.playStream(streams[index].id)
         this.props.setView(index);
+        this.props.playerState(true)
     }
 
     render(){
@@ -71,6 +70,7 @@ function mapStateToProps({streams, activeStream, streamView}){
 function mapDispatchToProps(dispatch) {
     return { 
         playStream: bindActionCreators(playStream, dispatch),
+        playerState: bindActionCreators(playerState, dispatch),
         setView: bindActionCreators(setView, dispatch)
     }
 }

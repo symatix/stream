@@ -6,7 +6,7 @@ import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
 import Controls from '../Controls/Controls';
 import Paper from 'material-ui/Paper';
-import { setView, playStream, stopStream } from '../../actions';
+import { setView, playStream, stopStream, playerState } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import Pagination from '../Pagination/Pagination';
 import BigButton from '../Button/BigButton';
@@ -66,6 +66,7 @@ class ContainerTablet extends Component {
 
         this.handleSwipe = this.handleSwipe.bind(this)
         this.handlePlay = this.handlePlay.bind(this)
+        this.handleStop = this.handleStop.bind(this)
     }
 
     componentWillReceiveProps(nextProps){
@@ -74,19 +75,31 @@ class ContainerTablet extends Component {
         }
     }
 
-    handlePlay = id => {
-        if (this.props.activeId === id){
-            return this.props.stopStream();
+    handlePlay = (id) => {
+        console.log(id)
+        this.props.playerState(true)
+        this.props.playStream(id);
+    }
+    handleStop = (id) => {
+        if (!this.props.player) {
+            return this.handlePlay(id);
         }
-        return this.props.playStream(id);
+        this.props.playerState(false)
+        this.props.stopStream();
     }
 
     renderStreamCards(){
-        const { streams, activeId, classes } = this.props;
+        const { player, streams, activeId, classes } = this.props;
+        console.log("init player state ", player)
         return streams.map( stream => {
             return(
                 <div key={stream.id} className={classes.playHolder}>
-                    <BigButton func={this.handlePlay} play={activeId === stream.id} id={stream.id}/>
+                    <BigButton 
+                        func={player 
+                            ? () => this.handleStop(stream.id)
+                            : () => this.handlePlay(stream.id)} 
+                        play={activeId === stream.id} 
+                        id={stream.id}/>
                 </div>
             )
         })
@@ -133,13 +146,17 @@ class ContainerTablet extends Component {
     }  
 }
 
+function mapStateToProps({player}){
+    return { player }
+}
 
 function mapDispatchToProps(dispatch){
     return { 
         setView: bindActionCreators(setView, dispatch),
         playStream: bindActionCreators(playStream, dispatch),
+        playerState: bindActionCreators(playerState, dispatch),
         stopStream: bindActionCreators(stopStream, dispatch)
     }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(ContainerTablet));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContainerTablet));

@@ -1,17 +1,13 @@
 import { playStream, stopStream } from './playStream';
-import { openPlayer, closePlayer } from './playerState';
-import { nextStream, prevStream } from './playerState';
+import { playerState } from './playerState';
 import { getStreams } from './getStreams';
 import { setView } from './setView';
 import { getMeta } from './getMeta';
 
 export {
+    playerState,
     playStream,
     stopStream,
-    openPlayer,
-    closePlayer,
-    nextStream, 
-    prevStream ,
     getStreams,
     setView,
     getMeta

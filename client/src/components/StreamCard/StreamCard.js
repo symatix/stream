@@ -43,7 +43,7 @@ const styles = {
 };
 
 const StreamCard = (props) => {
-	const { classes, name, info, id, activeId, metaData: { imgBig } } = props;
+	const { classes, name, info, id, activeId, metaData: { artist, track, imgBig } } = props;
 	const background = imgBig || "/images/player_desktop_background.jpg";
 	
 	return (
@@ -64,7 +64,9 @@ const StreamCard = (props) => {
 
 				<StreamCardContent
 					name={name}
-					info={info} />
+					info={info}
+					artist={activeId === id ? artist : '' }
+					track={activeId === id ? track : '' } />
 
 			</Card>
 		</Grid>

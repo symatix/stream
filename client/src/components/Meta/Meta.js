@@ -3,8 +3,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getMeta } from '../../actions';
-import MetaText from './MetaText';
-import MetaImg from './MetaImg';
+// ! import MetaText from './MetaText';
+// ! import MetaImg from './MetaImg';
 import conf from '../../config';
 
 class Meta extends Component {
@@ -34,11 +34,11 @@ class Meta extends Component {
 
     renderMeta(){
         if(this.props.metaData){
-            const {artist, track, imgSmall} = this.props.metaData;
+            // ! const {artist, track, imgSmall} = this.props.metaData;
             return(
                 <div>
-                    <MetaImg artist={artist} image={imgSmall} />
-                    <MetaText artist={artist} track={track} />
+                    {/*<MetaImg artist={artist} image={imgSmall} /> */}
+                    {/*<MetaText artist={artist} track={track} /> */}
                 </div>
             )
         }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const styles = {
   root: {
+    outline:0,
     height: 18,
     width: 18,
     cursor: 'pointer',
@@ -11,6 +12,7 @@ const styles = {
     padding: 0,
   },
   dot: {
+    outline: 0,
     backgroundColor: '#e4e6e7',
     height: 12,
     width: 12,

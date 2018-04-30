@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
-import Controls from '../Controls/Controls';
 import Paper from 'material-ui/Paper';
+import Controls from '../Controls/Controls';
 import { setView, playStream, stopStream, playerState } from '../../actions';
 import StreamCardContent from '../StreamCard/StreamCardContent';
 import Pagination from '../Pagination/Pagination';
@@ -88,6 +88,7 @@ class ContainerTablet extends Component {
         this.props.stopStream();
     }
 
+    // * renders the big button for each stream 
     renderStreamCards(){
         const { player, streams, activeId, classes } = this.props;
         console.log("init player state ", player)
@@ -131,15 +132,14 @@ class ContainerTablet extends Component {
                         index={this.state.index}
                         onChangeIndex={this.handleSwipe}>
                         {this.renderStreamCards()}
-                        
                     </SwipeableViews>
                     
-                        <Paper className={classes.controls} raised={0}>
-                            <Pagination dots={3} index={this.state.index} onChangeIndex={this.handleSwipe} />
-                            <StreamCardContent name={this.getInfo()[0]} info={this.getInfo()[1]} />
-                            <Controls active={this.props.active} />
-                            <br/>
-                        </Paper>
+                    <Paper className={classes.controls} raised={0}>
+                        <Pagination dots={3} index={this.state.index} onChangeIndex={this.handleSwipe} />
+                        <StreamCardContent name={this.getInfo()[0]} info={this.getInfo()[1]} />
+                        <Controls active={this.props.active} />
+                        <br/>
+                    </Paper>
                 </div>
             </MediaQuery>
         );

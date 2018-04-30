@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import MediaQuery from 'react-responsive';
 import SwipeableViews from 'react-swipeable-views';
 import Grid from 'material-ui/Grid';
+import IconButton from 'material-ui/IconButton';
 import Meta from '../Meta/Meta';
 import Controls from '../Controls/Controls';
-import IconButton from 'material-ui/IconButton';
 import { setView } from '../../actions';
 
 import Prev from '../../svg/prev.svg';

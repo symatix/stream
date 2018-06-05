@@ -25,7 +25,6 @@ app.get('/api/streams', (req, res) => {
 // if stream unsuccessful, send fallback object
 app.post('/api/play', (req, res) => {
     const stream = db.find(stream => stream.id === req.body.id);
-    //console.log('=> playing stream: ');
     const resObj = {stream: stream, volume:globalVol, meta:{}}
     console.log(`=> playing stream: ${resObj.stream.name}`);
     res.send(resObj);

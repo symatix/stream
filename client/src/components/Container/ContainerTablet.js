@@ -58,7 +58,7 @@ class ContainerTablet extends Component {
     };
 
     render() {
-        const { classes, children, active } = this.props;
+        const { classes, children, active, activeId } = this.props;
         return (
             <MediaQuery query="(min-width: 768px)">
             <MediaQuery query="(max-width: 1224px)">
@@ -94,7 +94,7 @@ class ContainerTablet extends Component {
 
 
             <Grid className={classes.controls} container spacing={16}>
-                <Controls active={active} />
+                <Controls active={active} id={activeId}/>
             </Grid>
             
 

@@ -91,7 +91,6 @@ class ContainerTablet extends Component {
     // * renders the big button for each stream 
     renderStreamCards(){
         const { player, streams, activeId, classes } = this.props;
-        console.log("init player state ", player)
         return streams.map( stream => {
             return(
                 <div key={stream.id} className={classes.playHolder}>
@@ -121,7 +120,7 @@ class ContainerTablet extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, activeId } = this.props;
         return (
             <MediaQuery query="(max-width: 767px)">
                 <div className={classes.root}>
@@ -135,9 +134,9 @@ class ContainerTablet extends Component {
                     </SwipeableViews>
                     
                     <Paper className={classes.controls} raised={0}>
-                        <Pagination dots={3} index={this.state.index} onChangeIndex={this.handleSwipe} />
+                        <Pagination dots={2} index={this.state.index} onChangeIndex={this.handleSwipe} />
                         <StreamCardContent name={this.getInfo()[0]} info={this.getInfo()[1]} />
-                        <Controls active={this.props.active} />
+                        <Controls active={this.props.active} id={activeId}/>
                         <br/>
                     </Paper>
                 </div>

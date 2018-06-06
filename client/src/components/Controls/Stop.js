@@ -29,13 +29,25 @@ class Stop extends Component {
             }, 2000)
         } else {
             this.props.playerState(!this.state.playing);
+            /* CLIENT PLAYER CODE */
+            if (this.state.playing) {
+                this.props.playStream(this.props.id, undefined, true)
+                this.setState({playing: !this.state.playing})
+            } else {
+                this.props.playStream(this.props.id)
+            }
+            /* END OF CLIENT PLAYER CODE */
+
             axios.post('/api/stop', { player: this.state.playing })
-                .then(res => this.setState({playing: !this.state.playing}))
+                .then(res => {
+                    this.setState({playing: !this.state.playing})
+                })
                 .catch(e => console.log(e));
         }
     }
 
     render(){
+        console.log(this.props)
         return (
             <IconButton style={style.iconHolder} color="primary" aria-label="Play/Pause" onClick={this.handlePlay.bind(this)} >
                 {this.props.player 

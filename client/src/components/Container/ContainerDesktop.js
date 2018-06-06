@@ -17,7 +17,7 @@ const styles = theme => ({
 });
 
 const ContainerDesktop = (props) => {
-    const { classes, children, active } = props;
+    const { classes, children, active, activeId } = props;
 
     return (
         <MediaQuery query="(min-width: 1224px)">
@@ -33,7 +33,7 @@ const ContainerDesktop = (props) => {
             </Grid>
 
             <Grid className={classes.controls} container spacing={16}>
-                <Controls active={active} />
+                <Controls active={active} id={activeId}/>
             </Grid>
             
         </MediaQuery>

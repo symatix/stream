@@ -13,11 +13,11 @@ const styles = theme => ({
 });
 
 const Controls = (props) => {
-    const { classes, active } = props;
+    const { classes, active, id } = props;
     return (
         <Grid className={classes.root} item xs={12}>
 
-            <Stop active={active} />
+            <Stop active={active} id={id}/>
             <Skip />
             <Volume />
             

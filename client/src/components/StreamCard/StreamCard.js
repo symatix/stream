@@ -59,14 +59,14 @@ const StreamCard = (props) => {
 				
 				<CardMedia
 					className={classes.media}
-					image={activeId === id ? background : "/images/player_desktop_background.jpg"}
+					image={"/images/player_desktop_background.jpg"}
 					title="Player"/>
 
 				<StreamCardContent
 					name={name}
 					info={info}
-					artist={activeId === id ? artist : '' }
-					track={activeId === id ? track : '' } />
+					artist={'' }
+					track={'' } />
 
 			</Card>
 		</Grid>
